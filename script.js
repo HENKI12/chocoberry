@@ -195,6 +195,43 @@ function addToCart(id) {
 
 }
 
+function addPromoToCart(promoId) {
+
+    const promos = {
+        1: {
+            id: 101,
+            name: "Promo Bundling Strawberry Coklat (2 Cup)",
+            price: 50000,
+            image: "img/iklan1.jpeg"
+        },
+        2: {
+            id: 102,
+            name: "Promo Paket Bucin Strawberry Coklat + Kunafa",
+            price: 35000,
+            image: "img/iklan2.jpeg"
+        }
+    };
+
+    const promo = promos[promoId];
+    if (!promo) return;
+
+    const existing = cart.find(item => item.id === promo.id);
+
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({
+            ...promo,
+            quantity: 1,
+            selected: false
+        });
+    }
+
+    saveCart();
+    updateCartCount();
+    showCartSuccess(promo.name);
+}
+
 function showCartSuccess(productName) {
 
     const modal = document.getElementById("cart-success-modal");
@@ -991,5 +1028,24 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("scroll", setActiveNav);
 
     setActiveNav();
+
+    const promoSection = document.querySelector(".promo-section");
+    if (promoSection) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+            promoSection.classList.add("is-visible");
+        } else {
+            promoSection.classList.add("promo-ready");
+            const promoObserver = new IntersectionObserver(entries => {
+                if (entries.some(entry => entry.isIntersecting)) {
+                    promoSection.classList.add("is-visible");
+                    promoObserver.disconnect();
+                }
+            }, { threshold: 0.15 });
+
+            promoObserver.observe(promoSection);
+        }
+    }
 
 });

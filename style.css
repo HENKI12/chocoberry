@@ -2476,5 +2476,314 @@ nav a.nav-link.active::after {
     display: none;
 }
 
+/* PROMO BANNER */
+.promo-section {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - 76px);
+    padding: clamp(54px, 8vh, 90px) 0 70px;
+    background:
+        radial-gradient(ellipse at 50% 58%, rgba(255, 255, 255, 0.96) 0, rgba(255, 239, 244, 0.68) 42%, transparent 72%),
+        linear-gradient(135deg, #f9dce5 0%, #fff6f4 45%, #f4d8df 100%);
+}
+
+.promo-section::before,
+.promo-section::after {
+    position: absolute;
+    z-index: 0;
+    width: 230px;
+    height: 230px;
+    border: 1px solid rgba(214, 92, 122, 0.12);
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+}
+
+.promo-section::before {
+    top: 12%;
+    left: -105px;
+}
+
+.promo-section::after {
+    right: -105px;
+    bottom: 8%;
+}
+
+.promo-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+.promo-section .section-heading h2 {
+    color: #49302a;
+}
+
+.promo-section .section-heading span {
+    display: inline-block;
+    padding: 5px 13px;
+    border: 1px solid #f3cbd4;
+    border-radius: 999px;
+    background: #fff;
+    color: #bd4967;
+    letter-spacing: 2px;
+}
+
+.promo-section .section-heading p {
+    color: #806d67;
+}
+
+.promo-grid {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    padding: 0 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.promo-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: clamp(280px, 36vw, 450px);
+    border: 1px solid rgba(255, 255, 255, 0.76);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 28px 70px rgba(109, 52, 71, 0.2);
+    backdrop-filter: blur(8px);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
+    transform: translateY(0);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.promo-card:first-child {
+    z-index: 1;
+    margin-right: -7vw;
+    --promo-tilt: -3deg;
+    --promo-rest: 12px;
+    transform: rotate(-3deg) translateY(12px);
+}
+
+.promo-card:last-child {
+    z-index: 2;
+    --promo-tilt: 3deg;
+    --promo-rest: -12px;
+    transform: rotate(3deg) translateY(-12px);
+}
+
+.promo-card:hover,
+.promo-card:focus-visible {
+    z-index: 3;
+    transform: rotate(0) translateY(-9px) scale(1.025);
+    border-color: rgba(214, 92, 122, 0.42);
+    box-shadow: 0 35px 80px rgba(109, 52, 71, 0.28);
+}
+
+.promo-card:focus-visible {
+    outline: 3px solid rgba(214, 92, 122, 0.45);
+    outline-offset: 4px;
+}
+
+.promo-image-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 21px 21px 0 0;
+    background: #fce4ea;
+}
+
+.promo-badge {
+    position: absolute;
+    z-index: 1;
+    top: 14px;
+    left: 14px;
+    padding: 7px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    background: rgba(73, 48, 42, 0.88);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(73, 48, 42, 0.18);
+}
+
+.promo-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.promo-card:hover img,
+.promo-card:focus-visible img {
+    transform: scale(1.035);
+}
+
+.promo-card-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px 18px;
+}
+
+.promo-card-kicker {
+    color: #806d67;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-align: center;
+}
+
+.promo-cta {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #d65c7a;
+    border-radius: 10px;
+    background: #d65c7a;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.promo-cta span {
+    display: inline-block;
+    margin-left: 5px;
+    transition: transform 0.2s ease;
+}
+
+.promo-card:hover .promo-cta,
+.promo-card:focus-visible .promo-cta {
+    background: #bd4967;
+    border-color: #bd4967;
+}
+
+.promo-card:hover .promo-cta span,
+.promo-card:focus-visible .promo-cta span {
+    transform: translate(3px, -2px);
+}
+
+.promo-section.promo-ready .section-heading,
+.promo-section.promo-ready .promo-card {
+    opacity: 0;
+    transform: translateY(20px) rotate(var(--promo-tilt, 0deg));
+    transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.promo-section.promo-ready.is-visible .section-heading,
+.promo-section.promo-ready.is-visible .promo-card {
+    opacity: 1;
+    transform: translateY(var(--promo-rest, 0)) rotate(var(--promo-tilt, 0deg));
+}
+
+.promo-section.promo-ready.is-visible .promo-card:nth-child(2) {
+    transition-delay: 0.14s;
+}
+
+.promo-section.promo-ready.is-visible .promo-card:hover,
+.promo-section.promo-ready.is-visible .promo-card:focus-visible {
+    transform: rotate(0) translateY(-9px) scale(1.025);
+}
+
+@media (max-width: 700px) {
+    .promo-section {
+        min-height: auto;
+        padding: 58px 0 64px;
+    }
+
+    .promo-grid {
+        width: 100%;
+        padding: 0 3%;
+        flex-direction: row;
+        gap: 0;
+    }
+
+    .promo-card {
+        width: 48vw;
+    }
+
+    .promo-card:first-child,
+    .promo-card:last-child {
+        --promo-rest: 0px;
+        --promo-tilt: 0deg;
+    }
+
+    .promo-card:first-child {
+        z-index: 1;
+        margin-right: -6vw;
+        --promo-tilt: -2deg;
+        transform: rotate(-2deg) translateY(6px);
+    }
+
+    .promo-card:last-child {
+        z-index: 2;
+        --promo-tilt: 2deg;
+        transform: rotate(2deg) translateY(-6px);
+    }
+
+    .promo-section.promo-ready .promo-card,
+    .promo-section.promo-ready.is-visible .promo-card {
+        transform: rotate(var(--promo-tilt)) translateY(var(--promo-rest));
+    }
+
+    .promo-section.promo-ready.is-visible .promo-card:hover,
+    .promo-section.promo-ready.is-visible .promo-card:focus-visible {
+        transform: rotate(0) translateY(-4px) scale(1.01);
+    }
+
+    .promo-card:hover,
+    .promo-card:focus-visible {
+        transform: rotate(0) translateY(-4px) scale(1.01);
+    }
+
+    .promo-card-info {
+        gap: 8px;
+        padding: 10px 9px 11px;
+    }
+
+    .promo-card-kicker {
+        font-size: 9px;
+        letter-spacing: 0.7px;
+    }
+
+    .promo-cta {
+        padding: 10px 6px;
+        font-size: 11px;
+    }
+
+    .promo-badge {
+        top: 8px;
+        left: 8px;
+        padding: 5px 7px;
+        font-size: 8px;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .promo-card,
+    .promo-card img,
+    .promo-cta,
+    .promo-cta span,
+    .promo-section.promo-ready .section-heading,
+    .promo-section.promo-ready .promo-card {
+        transition: none;
+        animation: none;
+    }
+
+    .promo-card:hover,
+    .promo-card:focus-visible,
+    .promo-card:hover img,
+    .promo-card:focus-visible img,
+    .promo-section.promo-ready.is-visible .promo-card:hover,
+    .promo-section.promo-ready.is-visible .promo-card:focus-visible {
+        transform: none;
+    }
+}
+
 @media (max-width: 500px) {
 }
